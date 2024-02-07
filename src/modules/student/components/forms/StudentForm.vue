@@ -55,6 +55,10 @@ export default {
         : 'Unknown error.'
 
       this.$snackbar.showSnackbar(errorMessage)
+    },
+    goToList(){
+      sessionStorage.removeItem('student')
+      this.$router.push(STUDENT_LIST.path)
     }
   },
   created() {
@@ -71,8 +75,7 @@ export default {
       this.readOnly = true
       this.show = true
     }
-  },
-  async mounted() {}
+  }
 }
 </script>
 
@@ -102,7 +105,7 @@ export default {
         variant="outlined"
       ></v-text-field>
       <v-btn type="submit" variant="tonal" color="green-darken-4"> Save </v-btn>
-      <v-btn :to="getStudentPath" variant="tonal" color="red-darken-4"> Close </v-btn>
+      <v-btn @click="goToList()" variant="tonal" color="red-darken-4"> Close </v-btn>
     </v-form>
   </div>
 </template>
