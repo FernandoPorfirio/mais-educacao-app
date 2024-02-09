@@ -93,7 +93,7 @@ export default {
         :items-per-page="10"
       >
         <template v-slot:top>
-          <v-toolbar flat>
+          <v-toolbar density="compact">
             <v-toolbar-title>Student list</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn :to="createStudentPath" variant="tonal" color="green-darken-4">

@@ -80,53 +80,59 @@ export default {
 
 <template>
   <div class="container">
-    <v-col class="12">
-      <v-form @submit.prevent="submitForm">
-        <v-row>
-          <v-col cols="2" v-if="show">
-            <v-text-field
-              disabled="true"
-              v-model="formData.id"
-              label="ID"
-              variant="outlined"
-            ></v-text-field>
-          </v-col>
-          <v-col cols="5" v-if="show">
-            <v-text-field
-              disabled="true"
-              v-model="formData.ra"
-              label="RA"
-              variant="outlined"
-            ></v-text-field>
-          </v-col>
-          <v-col cols="5">
-            <v-text-field
-              :disabled="disableCPF"
-              v-model="formData.cpf"
-              label="CPF"
-              variant="outlined"
-              v-mask="'###.###.###-##'"
-            ></v-text-field>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <v-text-field v-model="formData.name" label="Name" variant="outlined"></v-text-field>
-          </v-col>
-          <v-col>
-            <v-text-field v-model="formData.email" label="E-mail" variant="outlined"></v-text-field>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <v-btn type="submit" variant="tonal" color="green-darken-4" class="ma-1"> Save </v-btn>
-            <v-btn @click="goToList()" variant="tonal" color="red-darken-4" class="ma-1">
-              Close
-            </v-btn>
-          </v-col>
-        </v-row>
-      </v-form>
-    </v-col>
+    <v-card class="mr-3 ml-3 mt-3">
+      <v-toolbar density="compact" >
+        <v-toolbar-title>Student Form</v-toolbar-title>
+      </v-toolbar>
+      <v-card-text>
+        <v-form @submit.prevent="submitForm">
+          <v-row>
+            <v-col cols="2" v-if="show">
+              <v-text-field
+                disabled="true"
+                v-model="formData.id"
+                label="ID"
+                variant="outlined"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="5" v-if="show">
+              <v-text-field
+                disabled="true"
+                v-model="formData.ra"
+                label="RA"
+                variant="outlined"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="5">
+              <v-text-field
+                :disabled="disableCPF"
+                v-model="formData.cpf"
+                label="CPF"
+                variant="outlined"
+                v-mask="'###.###.###-##'"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <v-text-field v-model="formData.name" label="Name" variant="outlined"></v-text-field>
+            </v-col>
+            <v-col>
+              <v-text-field
+                v-model="formData.email"
+                label="E-mail"
+                variant="outlined"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+        </v-form>
+      </v-card-text>
+      <!-- <v-divider></v-divider> -->
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn type="submit" variant="tonal" color="green-darken-4" class="ma-1"> Save </v-btn>
+        <v-btn @click="goToList()" variant="tonal" color="red-darken-4" class="ma-1"> Close </v-btn>
+      </v-card-actions>
+    </v-card>
   </div>
 </template>
-
