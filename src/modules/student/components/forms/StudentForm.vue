@@ -32,6 +32,7 @@ export default {
   },
   methods: {
     async submitForm() {
+      console.log('submitForm() called');
       try {
         await this.validationSchema.validate(this.formData, { abortEarly: false })
         await StudentService.createStudent(this.formData)
@@ -89,7 +90,7 @@ export default {
           <v-row>
             <v-col cols="2" v-if="show">
               <v-text-field
-                disabled="true"
+                :disabled="true"
                 v-model="formData.id"
                 label="ID"
                 variant="outlined"
@@ -97,7 +98,7 @@ export default {
             </v-col>
             <v-col cols="5" v-if="show">
               <v-text-field
-                disabled="true"
+                :disabled="true"
                 v-model="formData.ra"
                 label="RA"
                 variant="outlined"
@@ -130,7 +131,7 @@ export default {
       <!-- <v-divider></v-divider> -->
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn type="submit" variant="tonal" color="green-darken-4" class="ma-1"> Save </v-btn>
+        <v-btn @click="submitForm()" type="submit" variant="tonal" color="green-darken-4" class="ma-1"> Save </v-btn>
         <v-btn @click="goToList()" variant="tonal" color="red-darken-4" class="ma-1"> Close </v-btn>
       </v-card-actions>
     </v-card>
