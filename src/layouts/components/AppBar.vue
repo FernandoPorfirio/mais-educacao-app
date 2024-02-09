@@ -17,10 +17,12 @@ export default {
 </script>
 
 <template>
-  <v-app-bar app>
+  <v-app-bar flat class="border-b">
     <v-app-bar-nav-icon @click="toggleDrawer"></v-app-bar-nav-icon>
     <app-logo :maxWidth="70" />
     <v-spacer></v-spacer>
-    <user-info />
+    <template #append>
+      <user-info />
+    </template>
   </v-app-bar>
 </template>
