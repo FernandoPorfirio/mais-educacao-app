@@ -8,7 +8,6 @@ export default {
   name: 'StudentForm',
   data() {
     return {
-      readOnly: false,
       show: false,
       formData: {
         id: '',
@@ -27,7 +26,8 @@ export default {
       }),
       validationErrors: {},
       loading: false,
-      getStudentPath: STUDENT_LIST.path
+      getStudentPath: STUDENT_LIST.path,
+      disableCPF: false
     }
   },
   methods: {
@@ -56,7 +56,7 @@ export default {
 
       this.$snackbar.showSnackbar(errorMessage)
     },
-    goToList(){
+    goToList() {
       sessionStorage.removeItem('student')
       this.$router.push(STUDENT_LIST.path)
     }
@@ -71,9 +71,8 @@ export default {
       this.formData.name = parsedData.name || ''
       this.formData.email = parsedData.email || ''
       this.formData.cpf = parsedData.cpf || ''
-
-      this.readOnly = true
       this.show = true
+      this.disableCPF = true
     }
   }
 }
@@ -81,33 +80,53 @@ export default {
 
 <template>
   <div class="container">
-    <v-form @submit.prevent="submitForm">
-      <v-text-field
-        v-if="show"
-        disabled="true"
-        v-model="formData.id"
-        label="ID"
-        variant="outlined"
-      ></v-text-field>
-      <v-text-field
-        v-if="show"
-        :readonly="readOnly"
-        v-model="formData.ra"
-        label="RA"
-        variant="outlined"
-      ></v-text-field>
-      <v-text-field v-model="formData.name" label="Name" variant="outlined"></v-text-field>
-      <v-text-field v-model="formData.email" label="E-mail" variant="outlined"></v-text-field>
-      <v-text-field
-        :readonly="readOnly"
-        v-model="formData.cpf"
-        label="CPF"
-        variant="outlined"
-      ></v-text-field>
-      <v-btn type="submit" variant="tonal" color="green-darken-4"> Save </v-btn>
-      <v-btn @click="goToList()" variant="tonal" color="red-darken-4"> Close </v-btn>
-    </v-form>
+    <v-col class="12">
+      <v-form @submit.prevent="submitForm">
+        <v-row>
+          <v-col cols="2" v-if="show">
+            <v-text-field
+              disabled="true"
+              v-model="formData.id"
+              label="ID"
+              variant="outlined"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="5" v-if="show">
+            <v-text-field
+              disabled="true"
+              v-model="formData.ra"
+              label="RA"
+              variant="outlined"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="5">
+            <v-text-field
+              :disabled="disableCPF"
+              v-model="formData.cpf"
+              label="CPF"
+              variant="outlined"
+              v-mask="'###.###.###-##'"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <v-text-field v-model="formData.name" label="Name" variant="outlined"></v-text-field>
+          </v-col>
+          <v-col>
+            <v-text-field v-model="formData.email" label="E-mail" variant="outlined"></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <v-btn type="submit" variant="tonal" color="green-darken-4" class="ma-1"> Save </v-btn>
+            <v-btn @click="goToList()" variant="tonal" color="red-darken-4" class="ma-1">
+              Close
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-form>
+    </v-col>
   </div>
 </template>
 
-<style scoped></style>

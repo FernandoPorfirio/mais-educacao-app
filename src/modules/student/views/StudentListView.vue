@@ -94,9 +94,8 @@ export default {
       >
         <template v-slot:top>
           <v-toolbar flat>
-            <v-toolbar-title>Lista de Alunos</v-toolbar-title>
+            <v-toolbar-title>Student list</v-toolbar-title>
             <v-spacer></v-spacer>
-
             <v-btn :to="createStudentPath" variant="tonal" color="green-darken-4">
               <v-icon>mdi-plus</v-icon> New Student
             </v-btn>
