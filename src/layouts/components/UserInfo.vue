@@ -1,5 +1,7 @@
 <script>
 import { LOGIN } from '@/constants/router.js'
+import AppLogoUser from '@/layouts/components/AppLogoUser.vue'
+AppLogoUser
 
 export default {
   data: () => ({
@@ -17,6 +19,9 @@ export default {
         : ''
     }
   },
+  components: {
+    AppLogoUser
+  },
   methods: {
     async logout() {
       this.$store.dispatch('auth/logout')
@@ -27,25 +32,19 @@ export default {
 </script>
 
 <template>
-  <v-list>
-    <v-list-item :title="userName" :subtitle="userEmail">
-      <template v-slot:append>
-        <v-menu>
-          <template v-slot:activator="{ props }">
-            <v-btn icon="mdi-dots-vertical" v-bind="props"></v-btn>
-          </template>
-          <v-list>
-            <v-list-item>
-              <v-list-item @click="logout">
-                <template v-slot:prepend>
-                  <v-icon :icon="logoutOption.icon"></v-icon>
-                </template>
-                <v-list-item-title>{{ logoutOption.text }}</v-list-item-title>
-              </v-list-item>
-            </v-list-item>
-          </v-list>
-        </v-menu>
-      </template>
-    </v-list-item>
-  </v-list>
+  <v-menu>
+    <template #activator="{ props }">
+      <v-avatar v-bind="props">
+        <app-logo-user />
+      </v-avatar>
+    </template>
+    <v-card min-width="200px">
+      <v-list :lines="false" density="compact" nav>
+        <v-list-item :title="userName" :subtitle="userEmail"></v-list-item>
+          <v-list-item :prepend-icon="logoutOption.icon" @click="logout">
+            <v-list-item-title>{{ logoutOption.text }}</v-list-item-title>
+          </v-list-item>
+      </v-list>
+    </v-card>
+  </v-menu>
 </template>
