@@ -12,6 +12,8 @@ import '@mdi/font/css/materialdesignicons.css'
 import SnackbarService from '@/components/SnackbarAlert/service.js'
 import SnackbarAlert from '@/components/SnackbarAlert/SnackbarAlert.vue'
 
+import VueTheMask from 'vue-the-mask'
+
 const vuetify = createVuetify({
   components,
   directives,
@@ -26,4 +28,4 @@ app.config.globalProperties.$snackbar = SnackbarService
 
 app.component('SnackbarAlert', SnackbarAlert)
 
-app.use(vuetify).use(router).use(store).mount('#app')
+app.use(vuetify).use(router).use(store).use(VueTheMask).mount('#app') 
